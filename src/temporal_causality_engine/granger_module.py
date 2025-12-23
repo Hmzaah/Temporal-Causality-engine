@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import warnings
 from statsmodels.tsa.stattools import grangercausalitytests
+from temporal_causality_engine.fdr import benjamini_hochberg
+
 
 def _safe_granger_test(x: pd.Series, y: pd.Series, maxlag: int) -> Dict[int, Dict[str, Any]]:
     arr = pd.concat([y, x], axis=1).dropna().values
@@ -44,3 +46,22 @@ def pairwise_granger(
                 pvals.loc[cause, effect] = np.nan
 
     return pvals, adj
+def pairwise_granger_fdr(
+    df: pd.DataFrame,
+    maxlag: int = 5,
+    alpha: float = 0.05,
+    test: str = "ssr_chi2test"
+):
+    """
+    Run pairwise Granger causality with FDR correction.
+    """
+    pvals, _ = pairwise_granger(
+        df=df,
+        maxlag=maxlag,
+        alpha=alpha,
+        test=test
+    )
+
+    adj_fdr = benjamini_hochberg(pvals, alpha=alpha)
+    return pvals, adj_fdr
+

@@ -1,3 +1,4 @@
+HEAD
 # Temporal Causality Engine
 
 Temporal Causality Engine is a research-oriented Python project for **causal discovery in multivariate time series**.  
@@ -114,3 +115,76 @@ Run the benchmarking pipeline:
 
 ```bash
 python examples/run_benchmark.py
+=======
+# 🧠 Temporal Causality Engine
+
+A research-grade Python toolkit for discovering, benchmarking, and visualizing
+causal relationships in multivariate time-series data.
+
+This project emphasizes statistical rigor, reproducibility, and honest causal
+interpretation, comparing classical linear methods with modern multivariate
+approaches.
+
+---
+
+## What this project does
+
+- Enforces stationarity in time-series data
+- Discovers causal structure using:
+  - Granger causality (raw)
+  - Granger causality with False Discovery Rate (FDR) correction
+  - PCMCI (tigramite)
+- Benchmarks methods against synthetic ground truth
+- Visualizes causal graphs interactively using Streamlit
+
+---
+
+## Key features
+
+- Stationarity enforcement (ADF + KPSS, automatic differencing)
+- Multiple causal discovery methods
+- Benjamini–Hochberg FDR correction
+- Ground-truth benchmarking (precision, recall, F1, runtime)
+- Interactive Streamlit dashboard
+- Pytest-based test suite and CI readiness
+
+---
+
+## Why some graphs are empty
+
+For Granger causality with FDR correction, empty graphs are expected under
+moderate coupling strength.
+
+This is correct statistical behavior:
+- Raw Granger is sensitive but overconfident
+- FDR-controlled Granger is conservative
+- PCMCI balances recall and false positives via multivariate conditioning
+
+Empty graphs are preserved intentionally to avoid false discoveries.
+
+---
+
+## Quickstart (local)
+
+```bash
+git clone https://github.com/Hmzaah/Temporal-Causality-engine.git
+cd Temporal-Causality-engine
+
+python -m venv .venv
+source .venv/Scripts/activate
+pip install -r requirements.txt
+pip install -e .
+
+streamlit run streamlit_app/app.py
+
+## Validated environment
+
+This project has been validated under:
+
+- Python 3.10–3.11
+- Conda (Windows / Linux)
+- NumPy + pandas via conda-forge
+- tigramite (PCMCI)
+
+Other configurations may work but are not guaranteed.
+27952ae (Enhance research polish: citation, methods, environment hygiene)

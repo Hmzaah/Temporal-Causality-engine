@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "Temporal Causality Engine"
+message: "If you use this software in academic work, please cite it."
+type: software
+authors:
+  - name: Hamza
+version: 0.1.0
+date-released: 2025-01-01
+url: https://github.com/Hmzaah/Temporal-Causality-engine

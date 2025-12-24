@@ -5,3 +5,20 @@ __pycache__/
 results/*
 .DS_Store
 .vscode/
+*.egg-info/
+
+# Build artifacts
+*.egg-info/
+build/
+dist/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local data
+data/
+
+# Environment
+.env
+.venv
